@@ -1,0 +1,14 @@
+---
+version: '2'
+services:
+  prometheus:
+    image: prom/prometheus:v2.33.0
+    container_name: prometheus
+    restart: unless-stopped
+    user: '0'
+    depends_on:
+        - broker
+    ports:
+      - '9090:9090'
+    volumes:
+      - ./prometheus-config:/etc/prometheus

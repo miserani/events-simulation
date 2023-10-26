@@ -1,0 +1,17 @@
+---
+version: '2'
+services:
+  grafana:
+    image: grafana/grafana:8.2.0
+    container_name: grafana
+    restart: unless-stopped
+    user: '0'
+    environment:
+      - GF_SERVER_ROOT_URL=http://miserani.grafana.server/
+      - GF_INSTALL_PLUGINS=grafana-clock-panel
+      - GF_INSTALL_PLUGINS=hamedkarbasi93-kafka-datasource
+      - GF_INSTALL_PLUGINS=grafana-piechart-panel
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./grafana-storage:/var/lib/grafana

@@ -1,0 +1,28 @@
+# To know more in https://github.com/redpanda-data/kowl/blob/master/docs/config/kowl.yaml
+
+kafka:
+  brokers:
+    - broker:29092
+  schemaRegistry:
+    enabled: true
+    urls: ["http://schema-registry:8081"] # Url with scheme is required, e.g. ["http://localhost:8081"]
+
+connect:
+  enabled: true
+  clusters:
+    - name: Kafka-Connect
+      url: http://connect:8083
+      tls:
+        enabled: false # Trusted certificates are still allowed if TLS is not enabled.
+      username:
+      password: # This can be set via the via the --connect.clusters.i.password flag as well (i to be replaced with the array index)
+      token: # This can be set via the via the --connect.clusters.i.token flag as well (i to be replaced with the array index)
+  connectTimeout: 15s # used to test cluster connectivity
+  readTimeout: 60s # overall REST timeout
+  requestTimeout: 6s # timeout for REST requests
+
+server:
+  listenPort: 7777
+
+# Prefix for all exported prometheus metrics
+metricsNamespace: kowl
